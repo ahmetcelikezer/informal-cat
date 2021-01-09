@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=cat
+      - POSTGRES_DB=cat
+      - POSTGRES_PASSWORD=cat
+
+  db_test:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=cat_test
+      - POSTGRES_DB=cat_test
+      - POSTGRES_PASSWORD=cat_test
