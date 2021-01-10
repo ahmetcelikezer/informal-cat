@@ -1,17 +1,12 @@
 import { ConflictException, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { User } from '../entity/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDTO } from '../dto/create-user.dto';
 import { genSalt, hash } from 'bcrypt';
+import { UserRepository } from '../entity/user.repository';
 
 @Injectable()
 export class UserService {
-  private readonly userRepository: Repository<User>;
-
-  constructor(@InjectRepository(User) userRepository: Repository<User>) {
-    this.userRepository = userRepository;
-  }
+  constructor(private userRepository: UserRepository) {}
 
   findById(id: string): Promise<User|undefined> {
     return this.userRepository.findOne({ id });
